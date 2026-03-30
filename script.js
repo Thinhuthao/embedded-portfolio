@@ -1,22 +1,36 @@
+
+// Scroll reveal animation
+
 const sections = document.querySelectorAll(".section");
 
-window.addEventListener("scroll", () => {
+const observer = new IntersectionObserver(entries => {
 
-sections.forEach(sec => {
+entries.forEach(entry => {
 
-const top = window.scrollY;
-const offset = sec.offsetTop - 300;
-
-if(top > offset){
-sec.style.opacity = 1;
-sec.style.transform = "translateY(0)";
+if(entry.isIntersecting){
+entry.target.style.opacity = 1;
+entry.target.style.transform = "translateY(0)";
 }
 
 });
 
 });
 
-const toggle = document.getElementById("theme-toggle");
+
+sections.forEach(section => {
+
+section.style.opacity = 0;
+section.style.transform = "translateY(40px)";
+section.style.transition = "all 1s";
+
+observer.observe(section);
+
+});
+
+
+// Theme toggle
+
+const toggle = document.getElementById("themeToggle");
 
 toggle.onclick = () => {
 
